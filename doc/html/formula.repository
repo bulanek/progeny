@@ -1,0 +1,21 @@
+\form#0:$N$
+\form#1:$a+bx$
+\form#2:$a=0$
+\form#3:$a+bx+cx^2$
+\form#4:$a+bx+cx^2+dx^3$
+\form#5:$a*\exp((x-b)/|c|)$
+\form#6:$a*\exp((x-b)/|c|)+d*x$
+\form#7:$a,\dots ,d$
+\form#8:$[0],\dots ,[3]$
+\form#9:$\chi^2$
+\form#10:$\delta(dose)=\delta(signal)/\frac{\partial f(x)}{\partial x}_{|f(x)=signal}$
+\form#11:$a$
+\form#12:$a=1$
+\form#13:$a-b\ln(t)$
+\form#14:$a*t^{-b}$
+\form#15:$t$
+\form#16:$a,b$
+\form#17:$fad\_0,fad\_1$
+\form#18:$D$
+\form#19:$D_{corrected}=\frac{F_{calibration}}{F_{natural}}\cdot D_{uncorrected}$
+\form#20:$F$

@@ -1,0 +1,33 @@
+\begin{DoxyAuthor}{Author}
+Boris Bulanek  National Radiation Protection Institute, Bartoskova 28, 140 00, Praha 4  \href{mailto:boris.bulanek@suro.cz}{\tt boris.\-bulanek@suro.\-cz}  00420 226 518 279 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+02/19/13
+\end{DoxyDate}
+\hypertarget{index_about}{}\section{About the program}\label{index_about}
+Program Progeny is created in order to provide simple and fast radon progeny concentration estimation.
+
+Program allow user to obtain and store data using \href{http://www.sqlite.org}{\tt Sqlite} database.
+
+The program uses some additional packages\-:
+\begin{DoxyItemize}
+\item U\-I (User Interface) framework \href{http://qt-project.org/}{\tt Qt}
+\item a package for minimization \href{http://www.gnu.org/software/gsl/}{\tt G\-S\-L}
+\item collection of {\ttfamily C++} tools \href{http://www.boost.org/}{\tt Boost}
+\item database software called \href{http://www.sqlite.org}{\tt Sqlite}
+\end{DoxyItemize}\hypertarget{index_Installation}{}\section{Installation}\label{index_Installation}
+A single executable file {\bfseries progeny.\-exe} is created for Windows (7 or X\-P) users using \href{http://pic.dhe.ibm.com/infocenter/aix/v7r1/index.jsp?topic=%2Fcom.ibm.aix.prftungd%2Fdoc%2Fprftungd%2Fwhen_dyn_linking_static_linking.htm}{\tt static linking}. Linux users can execute {\ttfamily progeny.\-exe} using program \href{http://www.winehq.org/}{\tt wine}. I haven't tried to install the program on Mac but I believe that the installation is similar to installation on Linux. \hypertarget{index_Linux}{}\subsection{Linux}\label{index_Linux}
+All of needed packages have to be in official repositories of your distribution as all of them are open source programs. For example in case of \href{https://www.archlinux.org/}{\tt Arch Linux} distribution, you have only to write down command like\-:\par
+ {\ttfamily sudo pacman -\/\-S cmake boost boost-\/build boost-\/libs gsl qt sqlite3 sqliteman}.\par
+ After installation you have to go to the src directory and e.\-g. follow these steps\-:\par
+ {\ttfamily  mkdir build\par
+ cd build\par
+ qmake-\/qt4 ..\par
+ make\par
+ ./progeny\par
+ } This approach uses shared library linking where the size of the executable {\ttfamily alive} is considerably smaller and you can use all of additional packages mentioned in the beginning of the section.\hypertarget{index_sql_win}{}\subsection{Sqlite database}\label{index_sql_win}
+All the information from binary file and some additional parameters can be stored in a simple database called \href{http://www.sqlite.org}{\tt Sqlite}. There exist graphical tool for working with a Sqlite database called \href{http://www.sqliteman.com}{\tt Sqliteman}.\hypertarget{index_running_code}{}\section{Program user guide}\label{index_running_code}
+\hypertarget{index_algorithm}{}\subsection{Algorithm}\label{index_algorithm}
+\hypertarget{index_running_program}{}\subsection{Running program}\label{index_running_program}
+\begin{DoxyVerb}If you have any question, please hesitate and send me a mail to: boris.bulanek@suro.cz\end{DoxyVerb}
+ 
