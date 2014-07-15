@@ -11,9 +11,16 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = progeny
 TEMPLATE = app
 
-LIBS+= -lgsl -lgslcblas
+unix:LIBS+= -lgsl -lgslcblas
 QT+=sql
 QT+=xml
+QT+=printsupport
+win32:QT+=static
+win32:DEPENDPATH+="C:\gsl-1.8\lib"
+win32:INCLUDEPATH+="C:\gsl-1.8\include"
+win32:LIBS+="C:\gsl-1.8\lib\libgsl.a"
+win32:LIBS+="C:\gsl-1.8\lib\libgslcblas.a"
+win32:INCLUDEPATH+="C:\Program Files\boost\boost_1_50"
 
 
 SOURCES += main.cpp\

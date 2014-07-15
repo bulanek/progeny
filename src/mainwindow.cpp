@@ -90,7 +90,8 @@ void MainWindow::getMainData(){
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About"), tr("Program for 222Rn progenies concentration estimation."
-                                             "Until now there is nothing done but later..: "
+                                             "Until now there is possibility for activity and num. det. part. estimation with knowledge of conc. of progenies in the reference chamber with known "
+                                             "concentrations. Program for conc. estimation from known det. calibration and continuos filter measurement is done, but question of imput form..."
                                              "You can find a detail information in doc\\html\\index.html "
                                              "or doc\\latex\\refman.pdf or send me a "
                                              "<a href=mailto:boris.bulanek@suro.cz>mail</a>."));
