@@ -67,7 +67,7 @@ void Progeny_time_dependence::showPlot(){
         plotWidget->graph(p)->setPen(pen);
         for (int i = 0; i < x.size(); ++i) {
             aTime=windowData.plotXRange[0]+(windowData.plotXRange[1]-windowData.plotXRange[0])*i/double(NUM_POINTS);
-            y[i]=progeny->getActivityFilter(p,mainWindowData.concentrations,aTime,mainWindowData.volume,mainWindowData.filt_time);
+            y[i]=mainWindowData.eff_filter*progeny->getActivityFilter(p,mainWindowData.concentrations,aTime,mainWindowData.volume,mainWindowData.filt_time);
             x[i]=aTime;
         }
         plotWidget->graph(p)->setData(x,y);

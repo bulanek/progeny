@@ -150,7 +150,7 @@ int SqlConnection::getSqlEntry(const int ID){
         return 0;
     }
 
-    // _dataHandle->set(data);
+    _dataHandle->setDataVec(data);
 
     return size;
 }
@@ -225,12 +225,12 @@ void SqlConnection::showDbTable(){
         QModelIndex index=currentSelection.at(i);
         switch(_currentDbLevel){
         case 1:
-            tableShow="INFO_2_"+index.data().toString().toStdString();
+            tableShow="info_2";//+index.data().toString().toStdString();
             _currentDbMeasurement=index.data().toString().toInt();
             _currentDbLevel=2;
             break;
         case 2:
-            tableShow="INFO_1";
+            tableShow="info_1";
             break;
         }
     }

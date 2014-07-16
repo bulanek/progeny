@@ -26,6 +26,8 @@ public:
     double _aTime;
     double _timeDelta;
     double _signal;
+    double _signalA;
+    double _signalC;
     double _eSignal;
     double _eSignalA;
     double _eSignalC;
@@ -33,21 +35,20 @@ public:
     double _eff_filter;
     double _timeFiltration;
     double _volumeFiltered;
-    double _signalA;
-    double _signalC;
     int _type;
     set<int> _isotopes;
     inline friend ostream& operator<<(ostream& stream,const Data& aData){
         stream<<"Data: "<<endl;
         stream<<"\t aTime: "<<aData._aTime<<endl
              <<"\t timeDelta: "<<aData._timeDelta<<endl;
-        if(aData._type==1){
-            stream<<"\t signal: "<<aData._signalA<<"+-"<<aData._eSignalA<<endl;
-        }else if(aData._type==3){
-            stream<<"\t signal: "<<aData._signalC<<"+-"<<aData._eSignalC<<endl;
-        }else{
-            stream<<"\t signal: "<<aData._signal<<"+-"<<aData._eSignal<<endl;
-        }
+//        if(aData._type==1){
+//            stream<<"\t signal: "<<aData._signalA<<"+-"<<aData._eSignalA<<endl;
+//       }else if(aData._type==3){
+//          stream<<"\t signal: "<<aData._signalC<<"+-"<<aData._eSignalC<<endl;
+//     }else{
+//          stream<<"\t signal: "<<aData._signal<<"+-"<<aData._eSignal<<endl;
+//      }
+        stream<<"\t signal: "<<aData._signal<<"+-"<<aData._eSignal<<endl;
            stream<<"\t efficiency: "<<aData._efficiency<<endl
           <<"\t eff_filter; "<<aData._eff_filter<<endl
          <<"\t timeFiltration: "<<aData._timeFiltration<<endl

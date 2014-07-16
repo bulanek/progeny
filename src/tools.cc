@@ -32,8 +32,8 @@ int chiSquare(const gsl_vector* xGSL,void* params,gsl_vector* f){
     }
     case 1:{
         progenyNumbers=inputData->progenyMatrix->getNumParticles(0,par,dataVec[i]._aTime,dataVec[i]._timeFiltration,dataVec[i]._timeDelta,dataVec[i]._volumeFiltered);
-        delta=progenyNumbers-dataVec[i]._signalA/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
-        sqrtError=abs(dataVec[i]._signalA/(dataVec[i]._efficiency*dataVec[i]._eff_filter));
+        delta=progenyNumbers-dataVec[i]._signal/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
+        sqrtError=abs(dataVec[i]._signal/(dataVec[i]._efficiency*dataVec[i]._eff_filter));
 
         break;
     }
@@ -47,8 +47,8 @@ int chiSquare(const gsl_vector* xGSL,void* params,gsl_vector* f){
     }
     case 3:{
         progenyNumbers=inputData->progenyMatrix->getNumParticles(2,par,dataVec[i]._aTime,dataVec[i]._timeFiltration,dataVec[i]._timeDelta,dataVec[i]._volumeFiltered);
-        delta=progenyNumbers-dataVec[i]._signalC/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
-        sqrtError=abs(dataVec[i]._signalC/(dataVec[i]._efficiency*dataVec[i]._eff_filter));
+        delta=progenyNumbers-dataVec[i]._signal/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
+        sqrtError=abs(dataVec[i]._signal/(dataVec[i]._efficiency*dataVec[i]._eff_filter));
 
         break;
     }
@@ -99,8 +99,8 @@ int chiSquareDer(const gsl_vector* xGSL,void* params,gsl_matrix* J){
                 break;
             }
             case 1:{
-                delta  = dataVec[i]._signalA/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
-                sqrtError=abs(dataVec[i]._signalA/dataVec[i]._efficiency*dataVec[i]._eff_filter);
+                delta  = dataVec[i]._signal/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
+                sqrtError=abs(dataVec[i]._signal/dataVec[i]._efficiency*dataVec[i]._eff_filter);
                 derValue=inputData->progenyMatrix->getNumParticles(0,par,dataVec[i]._aTime,dataVec[i]._timeFiltration,dataVec[i]._timeDelta,dataVec[i]._volumeFiltered);
                 break;
             }
@@ -111,8 +111,8 @@ int chiSquareDer(const gsl_vector* xGSL,void* params,gsl_matrix* J){
                 break;
             }
             case 3:{
-                delta  = dataVec[i]._signalC/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
-                sqrtError=abs(dataVec[i]._signalC/dataVec[i]._efficiency*dataVec[i]._eff_filter);
+                delta  = dataVec[i]._signal/(dataVec[i]._efficiency*dataVec[i]._eff_filter);
+                sqrtError=abs(dataVec[i]._signal/dataVec[i]._efficiency*dataVec[i]._eff_filter);
                 derValue=inputData->progenyMatrix->getNumParticles(2,par,dataVec[i]._aTime,dataVec[i]._timeFiltration,dataVec[i]._timeDelta,dataVec[i]._volumeFiltered);
                 break;
             }

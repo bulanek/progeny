@@ -23,6 +23,9 @@
 struct MainWindowData;
 struct OSLWindowData;
 struct Data;
+/**
+ * @brief The SqlHandle class for manipulating with sql entries
+ */
 class SqlHandle
 {
 public:

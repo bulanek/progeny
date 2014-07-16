@@ -60,7 +60,7 @@ public:
     static ProgenyMatrix* getProgeny();
     //const vector<vector<int> >& getDataPoints();
     const vector<Data>& getData();
-    int createData(string name);
+    int createDataFromTxt(string name);
     int openDb(string name);
 
     int getConfigurationData(const string& confDataName);
@@ -70,6 +70,7 @@ public:
 
 
 
+    inline DataHandle& setDataVec(const vector<Data> dataVec){_dataVec=dataVec;_inputData.aData=dataVec;_inputData.progenyMatrix=progeny; return *this;} /* mad syntax..will be corrected*/
     inline const gsl_vector* getResults(){return _results;}
     inline const gsl_matrix* getCovMat(){return _covMat;}
     inline const QSqlDatabase& getDb(){return _db;}
@@ -79,6 +80,7 @@ public:
     inline const string& getDatabaseName() const{return _databaseName;}
     inline const MainWindowData& getMainWindowData() {return _mainWindowData;}
     inline const TimeDependenceWindowData& getTimeDependenceWindowData() {return _timeDependenceWindowData;}
+
     DataHandle* setMainWindowData(MainWindowData& data);
     DataHandle* setTimeDependenceWindowData(TimeDependenceWindowData& data);
 

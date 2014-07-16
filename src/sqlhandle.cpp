@@ -21,6 +21,7 @@ SqlHandle* SqlHandle::getInstance()
     if(instance==0){
         instance=new SqlHandle();
     }
+    _dataHandle=DataHandle::getInstance();
     return instance;
 }
 
@@ -74,7 +75,6 @@ void SqlHandle::createMainTables(){
  *-----------------------------------------------------------------------------*/
 void SqlHandle::insertIntoMainInfoTable(const MainWindowData& mainWindowData){
 
-    _dataHandle=DataHandle::getInstance();
     string execStr=string("insert into INFO_1 (id,name,eff_filter,filt_time,volume,l1,l2,l3) values (")
                     +TOOLS::convertToString<int>(_id)+","
                     +"\""+mainWindowData.name+"\","
@@ -131,7 +131,6 @@ void SqlHandle::insertIntoSecondTable(const int ID){
     QSqlQuery query;
     bool queryReturn;
     string execStr;
-    _dataHandle=DataHandle::getInstance();
     const vector<Data> data=_dataHandle->getData();
 
     execStr="insert into "+tableName+"("
@@ -164,7 +163,7 @@ const vector<Data> SqlHandle::getSqlData(const int ID){
     QSqlQuery q;
     bool queryReturn;
     MainWindowData mainData;
-    queryReturn=q.exec("select id,name,eff_filter,filt_time,volume,l1,l2,l3 from INFO_1;");
+    queryReturn=q.exec("select id,filtration_time,air_volume, filter_efficiency from INFO_1;");
     if (!queryReturn){
         qDebug()<<q.lastQuery();
         qDebug()<<"Cannot read table "<<"INFO_1!";
@@ -173,27 +172,30 @@ const vector<Data> SqlHandle::getSqlData(const int ID){
         if(q.value(0).toInt()==ID) break;
     }
     QSqlRecord mainRec=q.record();
-    mainData.eff_filter=q.value(mainRec.indexOf("eff_filter")).toDouble();
-    mainData.filt_time=q.value(mainRec.indexOf("filt_time")).toDouble();
-    mainData.volume=q.value(mainRec.indexOf("volume")).toDouble();
-    mainData.lambda[0]=q.value(mainRec.indexOf("l1")).toDouble();
-    mainData.lambda[1]=q.value(mainRec.indexOf("l2")).toDouble();
-    mainData.lambda[2]=q.value(mainRec.indexOf("l3")).toDouble();
+    mainData.eff_filter=q.value(mainRec.indexOf("filter_efficiency")).toDouble();
+    mainData.filt_time=q.value(mainRec.indexOf("filtration_time")).toDouble();
+    mainData.volume=q.value(mainRec.indexOf("air_volume")).toDouble();
+
+    for(int i=0;i<3;++i){
+        mainData.lambda[i]=_dataHandle->getMainWindowData().lambda[i]; /* TODO not very clever idea, if there will be lambda in db..*/
+    }
+    //mainData.lambda[0]=q.value(mainRec.indexOf("l1")).toDouble();
+    //mainData.lambda[1]=q.value(mainRec.indexOf("l2")).toDouble();
+    //mainData.lambda[2]=q.value(mainRec.indexOf("l3")).toDouble();
 
     _dataHandle->setMainWindowData(mainData);
 
     vector<Data> dataVec;
     QSqlQuery q1;
-    string infoName="INFO_2_"+TOOLS::convertToString<int>(ID);
+    string infoName="INFO_2";//+TOOLS::convertToString<int>(ID);
     string queryStr="select "
-            "timeStart,"
+            "signal,"
+            "startTime,"
             "timeDelta,"
-            "eff,"
+            "detector_efficiency,"
             "type,"
-            "area_all,"
-            "area_A,"
-            "area_C"
-            " from "+infoName;
+            "id"
+            " from "+infoName +" WHERE id=="+TOOLS::convertToString(ID);
     queryReturn=q1.exec(queryStr.c_str());
     QSqlRecord record=q1.record();
     if(!queryReturn){
@@ -217,13 +219,11 @@ const vector<Data> SqlHandle::getSqlData(const int ID){
  *-----------------------------------------------------------------------------*/
 Data SqlHandle::getDataFromQuery(const QSqlQuery& query,const QSqlRecord& record){
     Data data;
-    data._aTime=query.value(record.indexOf("timeStart")).toDouble();
+    data._aTime=query.value(record.indexOf("startTime")).toDouble();
     data._timeDelta=query.value(record.indexOf("timeDelta")).toDouble();
-    data._efficiency=query.value(record.indexOf("eff")).toDouble();
+    data._efficiency=query.value(record.indexOf("detector_efficiency")).toDouble();
     data._type=query.value(record.indexOf("type")).toDouble();
-    data._signal=query.value(record.indexOf("area_all")).toDouble();
-    data._signalA=query.value(record.indexOf("area_A")).toDouble();
-    data._signalC=query.value(record.indexOf("area_C")).toDouble();
+    data._signal=query.value(record.indexOf("signal")).toDouble();
    return data;
 }
 

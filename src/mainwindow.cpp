@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "progeny_time_dependence.h"
 
+
+
 QString MainWindow::TITLE="Progeny estimation";
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -25,15 +27,13 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_actionOpen_triggered()
-{
+void MainWindow::on_actionOpen_triggered() {
     QString fname;
     try{
-        fname=QFileDialog::getOpenFileName(this,"Open file",
-                                           "");
+        fname=QFileDialog::getOpenFileName(this,"Open file","");
         if (fname=="") return;
         this->setWindowTitle(TITLE+"; File: "+fname);
-        if(_dataHandle->createData(fname.toStdString())==1){
+        if(_dataHandle->createDataFromTxt(fname.toStdString())==1){
             throw 1;
         }
 
@@ -61,6 +61,9 @@ void MainWindow::on_commandLinkButton_2_clicked()
     const gsl_vector* results=_dataHandle->getResults();
     const gsl_matrix* covMat=_dataHandle->getCovMat();
 
+    ui->lineEdit_4->setText(TOOLS::convertToString(gsl_vector_get(results,0)).c_str());
+    ui->lineEdit_5->setText(TOOLS::convertToString(gsl_vector_get(results,1)).c_str());
+    ui->lineEdit_6->setText(TOOLS::convertToString(gsl_vector_get(results,2)).c_str());
 }
 
 void MainWindow::setMainData(){
@@ -117,6 +120,9 @@ void MainWindow::on_actionOpen_database_triggered(){
         ui->commandLinkButton_2->setEnabled(1);
         ui->commandLinkButton_3->setEnabled(1);
         this->getMainData();
+        const vector<Data> dataVec=_dataHandle->getData();
+
+
 
         this->setWindowTitle(TITLE+"; Database entry name: "+QString(fname));
     }

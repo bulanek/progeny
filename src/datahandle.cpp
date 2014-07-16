@@ -84,7 +84,7 @@ int DataHandle::getConfigurationData(const string& confDataName){
 /*-----------------------------------------------------------------------------
  *
  *-----------------------------------------------------------------------------*/
-int DataHandle::createData(string name){
+int DataHandle::createDataFromTxt(string name){
 
     ifstream inFile(name.c_str());
     if(inFile.is_open()==0) return 1;
@@ -93,7 +93,8 @@ int DataHandle::createData(string name){
     Data aData;
     int isotopes;
     getline(inFile,line);
-    while(inFile>>aData._signal>>aData._aTime>>aData._timeDelta>>aData._efficiency>>isotopes){
+    while(inFile>>aData._signal>>aData._aTime>>aData._timeDelta>>aData._efficiency>>aData._type){
+        aData._eSignal=sqrt(abs(aData._signal));
         switch(isotopes){
             case 0:
                 aData._isotopes.insert(0),aData._isotopes.insert(2);

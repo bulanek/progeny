@@ -154,6 +154,12 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_4">
+        <property name="toolTip">
+         <string>Time from the end of filtration; can be negative</string>
+        </property>
+        <property name="statusTip">
+         <string>Time from the end of filtration; can be negative</string>
+        </property>
         <property name="text">
          <string>Time range</string>
         </property>

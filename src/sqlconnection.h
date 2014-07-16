@@ -30,6 +30,9 @@ namespace Ui {
 class SqlConnection;
 }
 
+/**
+ * @brief Class for showing, selecting sql database. Class for insertion and obtaining data is SqlHandle
+ */
 class SqlConnection : public QDialog
 {
     Q_OBJECT
