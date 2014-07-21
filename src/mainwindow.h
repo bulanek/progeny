@@ -6,6 +6,7 @@
 #include "datahandle.h"
 #include "tools.h"
 #include "sqlconnection.h"
+#include "concentrations.h"
 
 #include <iostream>
 

@@ -98,7 +98,6 @@ void Progeny_time_dependence::saveWindowData(){
     windowData.plotXRange[0]=ui->lineEdit_4->text().toDouble();
     windowData.plotXRange[1]=ui->lineEdit_5->text().toDouble();
 
-
     _dataHandle->setTimeDependenceWindowData(windowData);
 }
 

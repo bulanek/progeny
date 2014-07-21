@@ -15,9 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _dataHandle=DataHandle::getInstance();
     this->setMainData();
 
-    ui->commandLinkButton->setEnabled(0);
     ui->commandLinkButton_2->setEnabled(0);
-    ui->commandLinkButton_3->setEnabled(0);
+    ui->commandLinkButton_4->setEnabled(0);
 
 }
 
@@ -45,9 +44,9 @@ void MainWindow::on_actionOpen_triggered() {
         box.exec();
         return;
     }
-    ui->commandLinkButton->setEnabled(1);
     ui->commandLinkButton_2->setEnabled(1);
-    ui->commandLinkButton_3->setEnabled(1);
+    ui->commandLinkButton_4->setEnabled(1);
+
 }
 
 void MainWindow::on_commandLinkButton_2_clicked()
@@ -59,11 +58,13 @@ void MainWindow::on_commandLinkButton_2_clicked()
 
     _dataHandle->chiSquareComputeGSL(initialParameters);
     const gsl_vector* results=_dataHandle->getResults();
-    const gsl_matrix* covMat=_dataHandle->getCovMat();
 
     ui->lineEdit_4->setText(TOOLS::convertToString(gsl_vector_get(results,0)).c_str());
     ui->lineEdit_5->setText(TOOLS::convertToString(gsl_vector_get(results,1)).c_str());
     ui->lineEdit_6->setText(TOOLS::convertToString(gsl_vector_get(results,2)).c_str());
+
+    Concentrations concWindow;
+    concWindow.exec();
 }
 
 void MainWindow::setMainData(){
@@ -108,17 +109,15 @@ void MainWindow::on_actionOpen_database_triggered(){
     if (!_dataHandle->getDb().isOpen()) return;
 
 
-    ui->commandLinkButton->setEnabled(1);
     ui->commandLinkButton_2->setEnabled(1);
-    ui->commandLinkButton_3->setEnabled(1);
 
     SqlConnection sql;
     sql.onlyForOpen();
     if (sql.exec()==QDialog::Accepted){
         //ui->pushButton->setEnabled(1);
-        ui->commandLinkButton->setEnabled(1);
         ui->commandLinkButton_2->setEnabled(1);
-        ui->commandLinkButton_3->setEnabled(1);
+        ui->commandLinkButton_4->setEnabled(1);
+
         this->getMainData();
         const vector<Data> dataVec=_dataHandle->getData();
 

@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     sqlhandle.cpp \
     measurementdata.cpp \
     progeny_time_dependence.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    concentrations.cpp
 
 HEADERS  += mainwindow.h \
     progenyMatrix.hh \
@@ -42,9 +43,11 @@ HEADERS  += mainwindow.h \
     sqlhandle.h \
     measurementdata.h \
     progeny_time_dependence.h \
-    qcustomplot.h
+    qcustomplot.h \
+    concentrations.h
 
 FORMS    += mainwindow.ui \
     sqlconnection.ui \
     measurementdata.ui \
-    progeny_time_dependence.ui
+    progeny_time_dependence.ui \
+    concentrations.ui
