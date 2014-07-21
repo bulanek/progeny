@@ -2,6 +2,6 @@
 <!DOCTYPE xml>
 
 <xml version="1.0">
-    <DatabasePath>/home/boris/dokumenty/SURO/database/</DatabasePath>
+    <DatabasePath> /home/boris/dokumenty/SURO/medipix/programy/Progeny_UI/test/ </DatabasePath>
     <DatabaseName>test</DatabaseName>
 </xml>
