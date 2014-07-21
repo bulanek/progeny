@@ -59,7 +59,7 @@ public:
     static DataHandle* getInstance();
     static ProgenyMatrix* getProgeny();
     //const vector<vector<int> >& getDataPoints();
-    const vector<Data>& getData();
+    const inline vector<Data>& getData(){return _dataVec;}
     int createDataFromTxt(string name);
     int openDb(string name);
 

@@ -276,12 +276,6 @@ int DataHandle::chiSquareComputeGSL(double* initialParameters){
 /*-----------------------------------------------------------------------------
  *
  *-----------------------------------------------------------------------------*/
-const vector<Data>& DataHandle::getData(){
-    return _dataVec;
-}
-/*-----------------------------------------------------------------------------
- *
- *-----------------------------------------------------------------------------*/
 ostream& operator<<(ostream& stream,const DataHandle& dataHandle){
     stream<<"Main information: "<<endl;
     stream<<"\tNumber of measurements: "<<dataHandle._dataVec.size()<<endl;

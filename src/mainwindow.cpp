@@ -129,7 +129,30 @@ void MainWindow::on_actionOpen_database_triggered(){
 
 void MainWindow::on_commandLinkButton_4_clicked()
 {
+    const vector<Data> aData=_dataHandle->getData();
 
+    QDialog dialog;
+    dialog.setWindowTitle("Signal data table");
+    QTableWidget tableWidget(&dialog);
+    tableWidget.setColumnCount(5);
+    tableWidget.setRowCount(aData.size());
+    QStringList horizontalList;
+    horizontalList<<"signal"<<"startTime"<<"timeDelta"<<"det_eff"<<"type";
+    tableWidget.setHorizontalHeaderLabels(horizontalList);
+    for (unsigned i = 0; i < aData.size(); ++i) {
+        tableWidget.setItem(i,0,new QTableWidgetItem(TOOLS::convertToString(aData[i]._signal).c_str()));
+        tableWidget.setItem(i,1,new QTableWidgetItem(TOOLS::convertToString(aData[i]._aTime).c_str()));
+        tableWidget.setItem(i,2,new QTableWidgetItem(TOOLS::convertToString(aData[i]._timeDelta).c_str()));
+        tableWidget.setItem(i,3,new QTableWidgetItem(TOOLS::convertToString(aData[i]._efficiency).c_str()));
+        tableWidget.setItem(i,4,new QTableWidgetItem(TOOLS::convertToString(aData[i]._type).c_str()));
+    }
+    dialog.setMinimumWidth(tableWidget.horizontalHeader()->length()+60);
+    tableWidget.setMinimumWidth(tableWidget.horizontalHeader()->length()+60);//tableWidget.verticalHeader()->length()+100);
+    tableWidget.setMaximumHeight(800);
+    dialog.setMaximumHeight(500);
+    QGridLayout layout(&dialog);
+    layout.addWidget(&tableWidget,2,1);
+    dialog.exec();
 }
 
 void MainWindow::on_commandLinkButton_5_clicked()
