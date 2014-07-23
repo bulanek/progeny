@@ -1,32 +1,67 @@
 \begin{DoxyAuthor}{Author}
-Boris Bulanek  National Radiation Protection Institute, Bartoskova 28, 140 00, Praha 4  \href{mailto:boris.bulanek@suro.cz}{\tt boris.\-bulanek@suro.\-cz}  00420 226 518 279 
+Boris Bulanek  National Radiation Protection Institute, Bartoskova 28, 140 00, Praha 4  \href{mailto:boris.bulanek@suro.cz}{\tt boris.\+bulanek@suro.\+cz}  00420 226 518 279 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
 02/19/13
 \end{DoxyDate}
 \hypertarget{index_about}{}\section{About the program}\label{index_about}
-Program Progeny is created in order to provide simple and fast radon progeny concentration estimation.
+Program Progeny is created in order to provide simple and fast radon progeny concentration estimation. From the knowledge of the concentration of radon progenies user can estimate the activity of filter or the signal detected from particular detector with known efficiency for given time interval of data aquisition.
 
-Program allow user to obtain and store data using \href{http://www.sqlite.org}{\tt Sqlite} database.
+As an input file is used href=\char`\"{}http\+://www.\+sqlite.\+org\char`\"{}$>$Sqlite database.
 
-The program uses some additional packages\-:
+The program uses some additional packages\+:
 \begin{DoxyItemize}
-\item U\-I (User Interface) framework \href{http://qt-project.org/}{\tt Qt}
-\item a package for minimization \href{http://www.gnu.org/software/gsl/}{\tt G\-S\-L}
+\item U\+I (User Interface) framework \href{http://qt-project.org/}{\tt Qt}
+\item a package for minimization \href{http://www.gnu.org/software/gsl/}{\tt G\+S\+L}
 \item collection of {\ttfamily C++} tools \href{http://www.boost.org/}{\tt Boost}
-\item database software called \href{http://www.sqlite.org}{\tt Sqlite}
+\item database software \href{http://www.sqlite.org}{\tt Sqlite}
 \end{DoxyItemize}\hypertarget{index_Installation}{}\section{Installation}\label{index_Installation}
-A single executable file {\bfseries progeny.\-exe} is created for Windows (7 or X\-P) users using \href{http://pic.dhe.ibm.com/infocenter/aix/v7r1/index.jsp?topic=%2Fcom.ibm.aix.prftungd%2Fdoc%2Fprftungd%2Fwhen_dyn_linking_static_linking.htm}{\tt static linking}. Linux users can execute {\ttfamily progeny.\-exe} using program \href{http://www.winehq.org/}{\tt wine}. I haven't tried to install the program on Mac but I believe that the installation is similar to installation on Linux. \hypertarget{index_Linux}{}\subsection{Linux}\label{index_Linux}
-All of needed packages have to be in official repositories of your distribution as all of them are open source programs. For example in case of \href{https://www.archlinux.org/}{\tt Arch Linux} distribution, you have only to write down command like\-:\par
- {\ttfamily sudo pacman -\/\-S cmake boost boost-\/build boost-\/libs gsl qt sqlite3 sqliteman}.\par
- After installation you have to go to the src directory and e.\-g. follow these steps\-:\par
- {\ttfamily  mkdir build\par
- cd build\par
- qmake-\/qt4 ..\par
- make\par
- ./progeny\par
- } This approach uses shared library linking where the size of the executable {\ttfamily alive} is considerably smaller and you can use all of additional packages mentioned in the beginning of the section.\hypertarget{index_sql_win}{}\subsection{Sqlite database}\label{index_sql_win}
-All the information from binary file and some additional parameters can be stored in a simple database called \href{http://www.sqlite.org}{\tt Sqlite}. There exist graphical tool for working with a Sqlite database called \href{http://www.sqliteman.com}{\tt Sqliteman}.\hypertarget{index_running_code}{}\section{Program user guide}\label{index_running_code}
+A single executable file {\bfseries progeny.\+exe} is created for Windows (7 or X\+P) users using static libraries linking. \hypertarget{index_Linux}{}\subsection{Linux}\label{index_Linux}
+All of needed packages have to be in official repositories of your distribution as all of them are open source programs. For example in case of \href{https://www.archlinux.org/}{\tt Arch Linux} distribution, you have only to write down command like\+:~\newline
+ {\ttfamily sudo pacman -\/\+S cmake boost boost-\/libs gsl qt sqlite3 sqlitebrowser}.~\newline
+ After installation you have to go to the src directory and e.\+g. follow these steps\+:~\newline
+ {\ttfamily  mkdir build~\newline
+ cd build~\newline
+ qmake(-\/qt4) ..~\newline
+ make~\newline
+ ./progeny \&~\newline
+ } Compilation is made using shared libraries.\hypertarget{index_sql_win}{}\subsection{Sqlite database}\label{index_sql_win}
+All the information from binary file and some additional parameters can be stored in a simple database called \href{http://www.sqlite.org}{\tt Sqlite}. There exist graphical tool for working with a Sqlite database called \href{https://github.com/sqlitebrowser/sqlitebrowser}{\tt Sqlitebrowser}. Following conventions are used for input sqlite tables\+: Two tables {\itshape info\+\_\+1} and {\itshape info\+\_\+2} are used as an input data tables. The content of tables entries is following. The content of {\itshape info\+\_\+1} table are information connected with filtration through filter. The content of {\itshape info\+\_\+2} table are information about filter measurement with particular detector.
+\begin{DoxyItemize}
+\item info\+\_\+1
+\begin{DoxyItemize}
+\item {\ttfamily filtration\+\_\+time} -\/ Time of filtration through filter in seconds ~\newline
+
+\item {\ttfamily air\+\_\+volume} -\/ Amount of air filtered (liters) ~\newline
+
+\item {\ttfamily filter\+\_\+efficiency} -\/ Efficiency to catch progenies on filter (no distinction between types of progenies) ~\newline
+
+\item {\ttfamily id} -\/ Identification of measurement needed for {\itshape info\+\_\+2} table with the same table entry ~\newline
+
+\item {\ttfamily measurement\+\_\+datetime} -\/ Voluntary information about date and time of measurement ~\newline
+
+\end{DoxyItemize}
+\item info\+\_\+2
+\begin{DoxyItemize}
+\item {\ttfamily signal} -\/ Signal (number of events) obtained from detector measurement ~\newline
+
+\item {\ttfamily start\+Time} -\/ Time of beginning of measurement with particular detector. The time from the end of filtration (in seconds) ~\newline
+
+\item {\ttfamily time\+Delta} -\/ Time of measurement with particular detector (in seconds) ~\newline
+
+\item {\ttfamily detector\+\_\+efficiency} -\/ Efficiency of detecting signal (events) with particular detector for particular signal.. ~\newline
+
+\item {\ttfamily type} -\/ Type of measurement progenies
+\begin{DoxyItemize}
+\item 0 Rn\+A + Rn\+C (e.\+g. summary alpha)
+\item 1 Rn\+A
+\item 2 Rn\+B
+\item 3 Rn\+C
+\item 4 Rn\+B+\+Rn\+C (e.\+g. summary beta)
+\end{DoxyItemize}
+\item {\ttfamily id} Identification of measurement with particular device for assignment to the {\itshape info\+\_\+1} table entry with the same {\ttfamily id}
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{index_running_code}{}\section{Program user guide}\label{index_running_code}
 \hypertarget{index_algorithm}{}\subsection{Algorithm}\label{index_algorithm}
 \hypertarget{index_running_program}{}\subsection{Running program}\label{index_running_program}
 \begin{DoxyVerb}If you have any question, please hesitate and send me a mail to: boris.bulanek@suro.cz\end{DoxyVerb}
